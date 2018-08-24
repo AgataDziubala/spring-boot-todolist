@@ -1,9 +1,6 @@
 package pl.agatadziubala.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +11,6 @@ import javax.persistence.Id;
 @Builder
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 public class Todo {
 
     @Id
@@ -23,4 +19,8 @@ public class Todo {
 
     private String text;
     private boolean done;
+
+    public Todo(String text) {
+        this.text = text;
+    }
 }

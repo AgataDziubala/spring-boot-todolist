@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.agatadziubala</groupId>
-    <artifactId>demo-vaadin</artifactId>
+    <artifactId>Simple Spring Boot ToDoList</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 

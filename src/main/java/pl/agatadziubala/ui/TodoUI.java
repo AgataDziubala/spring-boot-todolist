@@ -1,8 +1,6 @@
 package pl.agatadziubala.ui;
 
 import com.vaadin.annotations.Theme;
-import com.vaadin.event.ShortcutAction;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
@@ -12,28 +10,47 @@ import pl.agatadziubala.repository.TodoRepository;
 
 @Theme("valo")
 @SpringUI(path = "")
-public  class TodoUI extends UI {
+public class TodoUI extends UI {
 
     @Autowired
     TodoRepository todoRepository;
 
+    private Grid<Todo> todosGrid;
+
+    private VerticalLayout rootLayout;
+
+    @Autowired
+    private TodoLayout todoLayout;
+
     @Override
     protected void init(VaadinRequest request) {
-        final TextField nameField = new TextField();
-        nameField.setCaption("Name of task");
-
-        final Button saveButton = new Button("",  clickEvent -> {
-            todoRepository.save(new Todo(nameField.getValue()));
-
-        });
-
-        saveButton.setIcon(FontAwesome.PLUS);
-        saveButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-        setContent(new VerticalLayout(nameField, saveButton));
+        setupLayout();
+        addForm();
+        addTodoList();
     }
 
+    private void setupLayout() {
+        rootLayout = new VerticalLayout();
+        setContent(rootLayout);
+    }
 
+    private void addForm() {
+        HorizontalLayout formLayout = new HorizontalLayout();
 
-//    List<Todo> todos = todoRepository.findAll();
+        TextField taskName = new TextField();
+        Button saveButton = new Button();
+        saveButton.setCaption("Save");
+
+        formLayout.addComponents(taskName, saveButton);
+        rootLayout.addComponent(formLayout);
+
+        saveButton.addClickListener(clickEvent -> {
+            todoLayout.addTask(new Todo(taskName.getValue()));
+        });
+    }
+
+    private void addTodoList() {
+        rootLayout.addComponent(todoLayout);
+    }
 
 }

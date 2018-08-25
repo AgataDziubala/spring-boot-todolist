@@ -47,10 +47,16 @@ public class TodoUI extends UI {
         rootLayout.addComponent(formLayout);
 
         saveButton.addClickListener(clickEvent -> {
-            todoLayout.addTask(new Todo(taskName.getValue()));
+            try {
+                todoLayout.addTask(new Todo(taskName.getValue()));
+            } catch (Exception e) {
+                Notification.show("Field can't be empty").setStyleName(ValoTheme.NOTIFICATION_WARNING);
+            }
+            if (!taskName.getValue().isEmpty()) {
+                Notification.show("Task saved!").setPosition(Position.BOTTOM_CENTER);
+            }
             taskName.clear();
             taskName.focus();
-            Notification.show("Task saved!").setPosition(Position.BOTTOM_CENTER);
         });
         saveButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
     }

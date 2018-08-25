@@ -11,8 +11,8 @@ import pl.agatadziubala.repository.TodoRepository;
 
 public class TodoItemLayout extends HorizontalLayout {
 
-    private  TextField name;
-    private  CheckBox done;
+    private TextField name;
+    private CheckBox done;
 
 
     TodoRepository todoRepository;
@@ -40,6 +40,5 @@ public class TodoItemLayout extends HorizontalLayout {
         Binder<Todo> binder = new Binder<>(Todo.class);
         binder.bindInstanceFields(this);
         binder.setBean(todo);
-
     }
 }

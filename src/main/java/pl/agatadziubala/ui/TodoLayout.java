@@ -14,6 +14,8 @@ public class TodoLayout extends VerticalLayout {
     @Autowired
     private TodoRepository todoRepository;
 
+    private List<Todo> todos;
+
     public void updateTodoList() {
         setTodos(todoRepository.findAll());
     }
@@ -23,10 +25,14 @@ public class TodoLayout extends VerticalLayout {
         updateTodoList();
     }
 
-    public void setTodos(List<Todo> todos) {
+    private void setTodos(List<Todo> todos) {
+        this.todos = todos;
         removeAllComponents();
-        for (Todo todo : todos) {
-            addComponent(new TodoItemLayout(todo));
-        }
+        todos.forEach(todo -> addComponent(new TodoItemLayout(todo, todoRepository)));
+    }
+
+    public void deleteCompleted() {
+        todoRepository.deleteByDone(true);
+        updateTodoList();
     }
 }

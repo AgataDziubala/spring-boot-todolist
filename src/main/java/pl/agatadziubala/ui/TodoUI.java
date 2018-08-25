@@ -7,16 +7,10 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.agatadziubala.domain.Todo;
-import pl.agatadziubala.repository.TodoRepository;
 
 @Theme("valo")
 @SpringUI(path = "")
 public class TodoUI extends UI {
-
-    @Autowired
-    TodoRepository todoRepository;
-
-    private Grid<Todo> todosGrid;
 
     private VerticalLayout rootLayout;
 
@@ -28,6 +22,7 @@ public class TodoUI extends UI {
         setupLayout();
         addForm();
         addTodoList();
+        addDeleteButton();
     }
 
     private void setupLayout() {
@@ -49,12 +44,20 @@ public class TodoUI extends UI {
             todoLayout.addTask(new Todo(taskName.getValue()));
             taskName.clear();
             taskName.focus();
-            saveButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
+
         });
+        saveButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
     }
 
     private void addTodoList() {
         rootLayout.addComponent(todoLayout);
     }
 
+    private void addDeleteButton() {
+        Button deleteButton = new Button();
+        deleteButton.setCaption("Delete completed");
+        rootLayout.addComponent(deleteButton);
+
+        deleteButton.addClickListener(clickEvent -> todoLayout.deleteCompleted());
+    }
 }

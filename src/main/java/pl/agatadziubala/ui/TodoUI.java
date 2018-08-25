@@ -29,7 +29,6 @@ public class TodoUI extends UI {
 
     private void setupLayout() {
         rootLayout = new VerticalLayout();
-        //rootLayout.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
         setContent(rootLayout);
     }
 

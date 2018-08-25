@@ -35,7 +35,7 @@ public class TodoLayout extends VerticalLayout {
     private void setTodos(List<Todo> todos) {
         this.todos = todos;
         removeAllComponents();
-        todos.forEach(todo -> addComponent(new TodoItemLayout(todo)));
+        todos.forEach(todo -> addComponent(new TodoItemLayout(todo, todoRepository)));
     }
 
     public void deleteCompleted() {

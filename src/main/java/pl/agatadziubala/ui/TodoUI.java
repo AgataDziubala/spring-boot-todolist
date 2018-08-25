@@ -1,6 +1,7 @@
 package pl.agatadziubala.ui;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
@@ -46,6 +47,9 @@ public class TodoUI extends UI {
 
         saveButton.addClickListener(clickEvent -> {
             todoLayout.addTask(new Todo(taskName.getValue()));
+            taskName.clear();
+            taskName.focus();
+            saveButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         });
     }
 

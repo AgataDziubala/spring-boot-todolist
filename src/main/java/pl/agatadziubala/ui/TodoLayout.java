@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pl.agatadziubala.domain.Todo;
 import pl.agatadziubala.repository.TodoRepository;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @SpringComponent
@@ -15,6 +16,12 @@ public class TodoLayout extends VerticalLayout {
     private TodoRepository todoRepository;
 
     private List<Todo> todos;
+
+    @PostConstruct
+    void init() {
+        setWidth("80%");
+        updateTodoList();
+    }
 
     public void updateTodoList() {
         setTodos(todoRepository.findAll());

@@ -5,6 +5,7 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.themes.ValoTheme;
 import pl.agatadziubala.domain.Todo;
 import pl.agatadziubala.repository.TodoRepository;
 
@@ -24,13 +25,17 @@ public class TodoItemLayout extends HorizontalLayout {
         done = new CheckBox();
         this.todoRepository = todoRepository;
 
-        addComponents(name, done);
+        name.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
+
+        addComponent(done);
+        addComponentsAndExpand(name);
 
         done.addValueChangeListener(event -> {
             boolean value = event.getValue();
             todo.setDone(value);
             todoRepository.save(todo);
         });
+        done.clear();
 
         Binder<Todo> binder = new Binder<>(Todo.class);
         binder.bindInstanceFields(this);

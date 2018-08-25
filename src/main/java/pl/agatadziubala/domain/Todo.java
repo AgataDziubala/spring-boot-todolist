@@ -20,7 +20,7 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Size(min = 3, max = 50)
+    @Size(min = 1, max = 50)
     private String name;
     private boolean done;
 

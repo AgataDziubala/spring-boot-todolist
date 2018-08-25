@@ -17,13 +17,12 @@ public class TodoItemLayout extends HorizontalLayout {
 
     TodoRepository todoRepository;
 
-    public TodoItemLayout(Todo todo, TodoRepository todoRepository) {
+    public TodoItemLayout(Todo todo) {
         setWidth("100%");
         setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
 
         name = new TextField();
         done = new CheckBox();
-        this.todoRepository = todoRepository;
 
         name.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
 
